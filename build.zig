@@ -9,7 +9,13 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    
+    const pg = b.dependency("pg", .{
+    .target = target,
+    .optimize = optimize,
+    });
 
+    exe.root_module.addImport("pg", pg.module("pg"));
 
     b.installArtifact(exe);
 

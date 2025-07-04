@@ -4,6 +4,10 @@
     .fingerprint = 0x5208251de5ba35ef,
     .minimum_zig_version = "0.15.0-dev.847+850655f06",
     .dependencies = .{
+        .pg = .{
+            .url = "git+https://github.com/karlseguin/pg.zig?ref=master#842541eb22a6da1e43a2e78c1b20b5ea88aa9366",
+            .hash = "pg-0.0.0-Wp_7gfMCBgDT6BLHD1r7hNtVeXs6yJbFBkNar4uY-ZDB",
+        },
     },
     .paths = .{ "build.zig", "build.zig.zon", "src" },
 }
