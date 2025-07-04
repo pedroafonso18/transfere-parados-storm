@@ -1,5 +1,7 @@
 const std = @import("std");
 const pg = @import("pg");
+const utils = @import("utils.zig");
+
 
 // ============== [CONNECT DB] ============== //
 pub fn connect_db(db_url: []const u8, allocator: std.mem.Allocator) !*pg.Pool {
@@ -10,6 +12,7 @@ pub fn connect_db(db_url: []const u8, allocator: std.mem.Allocator) !*pg.Pool {
     return pool;
 }
 // ============== [CONNECT DB] ============== //
+
 
 
 // ============== [FETCH DB - TYPES] ============== //
@@ -30,6 +33,7 @@ const Logs = struct {
     sucesso: bool
 };
 // ============== [FETCH DB - TYPES] ============== //
+
 
 
 // ============== [FETCH DB] ============== //
@@ -131,6 +135,8 @@ pub fn fetch_abertos(pool: *pg.Pool, allocator: std.mem.Allocator) ![][]const u8
 }
 // ============== [FETCH DB] ============== //
 
+
+
 // ============== [INSERT DB] ============== //
 pub fn log_requests(pool: *pg.Pool, logs: [][]const u8) !void {
     var conn = try pool.acquire();
@@ -163,3 +169,24 @@ pub fn log_transfers(pool: *pg.Pool, logs: []Logs) !void {
     }
     return;
 }
+// ============== [INSERT DB] ============== //
+
+
+
+// ============== [VERIFY DB] ============== //
+fn verify_cancelados_huggy(pool: *pg.Pool, cancelados: []StormCancelados, allocator: std.mem.Allocator) !StormCancelados {
+    if (cancelados.len == 0) {
+        std.debug.print("WARNING: cancelados is empty, returning...", .{});
+        return cancelados;
+    }
+    var conn = try pool.acquire();
+    defer conn.release();
+
+    var result = std.ArrayList(StormCancelados).init(allocator);  
+    for (cancelados) |cancelado| {
+        const cleaned_number = try utils.cleanPhoneNumber(allocator, cancelado.numero);
+
+    }
+}
+
+// ============== [VERIFY DB] ============== //
