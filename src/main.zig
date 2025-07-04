@@ -12,14 +12,14 @@ pub fn main() !void {
 
     const allocator = std.heap.page_allocator;
     const pool= db.connect_db(cfg.db_url_huggy, allocator) catch |err| {
-        std.debug.print("ERROR: AT CONNECTING TO DB: {}", .{err});
+        std.debug.print("ERROR: AT CONNECTING TO DB: {}\n", .{err});
         return;
     };
     const opt = db.fetch_options(pool, allocator) catch |err| {
-        std.debug.print("ERROR: AT FETCHING DATA FROM DB: {}", .{err});
+        std.debug.print("ERROR: AT FETCHING DATA FROM DB: {}\n", .{err});
         return;
     };
     for (opt) |item| {
-        std.debug.print("{s}", .{item});
+        std.debug.print("{s}\n", .{item});
     }
 }
