@@ -1,0 +1,9 @@
+.{
+    .name = .transfer_storm,
+    .version = "0.0.1",
+    .fingerprint = 0x5208251de5ba35ef,
+    .minimum_zig_version = "0.15.0-dev.847+850655f06",
+    .dependencies = .{
+    },
+    .paths = .{ "build.zig", "build.zig.zon", "src" },
+}
